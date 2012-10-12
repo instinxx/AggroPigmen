@@ -5,32 +5,23 @@ import org.bukkit.World.Environment;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.plugin.java.JavaPlugin;
-import java.util.logging.Logger;
 
 
-
-
-
-
-public class aggroPigmen extends JavaPlugin implements Listener{
-	public static aggroPigmen plugin;
-	public static final Logger log = Logger.getLogger("Minecraft");
-	
-	
-	
-	@Override
+public class aggroPigmen extends JavaPlugin implements Listener {
 	public void onEnable() {
-		// TODO Insert what happens on plugin enable
 		getLogger().info("AggroPigmen is loaded!");
+		getServer().getPluginManager().registerEvents(this, this);
 	}		
 	
 	private Player target;		
 				
 	
-	@SuppressWarnings("null")
+
+	@EventHandler
 	public void onCreatureSpawn(CreatureSpawnEvent event){
 			
 			if(event.isCancelled()){
@@ -47,7 +38,7 @@ public class aggroPigmen extends JavaPlugin implements Listener{
 			}
 			
 			World world = null;
-			if (!world.getEnvironment().equals(Environment.NETHER)){
+			if (extracted(world).getEnvironment().equals(Environment.NETHER)){
 				return;
 			}
 			
@@ -61,6 +52,10 @@ public class aggroPigmen extends JavaPlugin implements Listener{
 			}
 			
 		}
+
+	private World extracted(World world) {
+		return world;
+	}
 		
 	@Override
 	public void onDisable() {
