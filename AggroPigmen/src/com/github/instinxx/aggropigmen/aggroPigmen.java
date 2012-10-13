@@ -1,7 +1,6 @@
 package com.github.instinxx.aggropigmen;
 
 import java.util.logging.Logger;
-
 import org.bukkit.Server;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
@@ -10,6 +9,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 
@@ -18,10 +18,7 @@ public class aggroPigmen extends JavaPlugin implements Listener {
 	public static aggroPigmen plugin;
 	public static final Logger log = Logger.getLogger("Minecraft");
 	
-	
-	@Override
 	public void onEnable() {
-		plugin = this;
 		getLogger().info("AggroPigmen is Enabled!");
 		getServer().getPluginManager().registerEvents(this, this);
 	}
@@ -29,7 +26,7 @@ public class aggroPigmen extends JavaPlugin implements Listener {
 	private Player target;
 	
 	
-	@EventHandler
+@EventHandler(priority = EventPriority.NORMAL)
 	public void onCreatureSpawn(CreatureSpawnEvent event){
 
 		if(event.isCancelled()){
@@ -52,7 +49,7 @@ public class aggroPigmen extends JavaPlugin implements Listener {
 		}
 			
 	
-	@Override
+
 	public void onDisable() {
 		getLogger().info("AggroPigmen are disabled - Be nice to them!");
 	}}
